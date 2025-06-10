@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 
 export default function Home() {
@@ -26,7 +27,7 @@ export default function Home() {
         setLoading(false);
       }
     } catch (err) {
-      alert("Chyba spojení se serverem.");
+      alert("Chyba spojení se serverem: " + err.message);
       setLoading(false);
     }
   };

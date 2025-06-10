@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     if (data.code === "0") {
       res.status(200).json({ redirect: data.redirect });
     } else {
-      res.status(500).json({ error: "ComGate error", detail: data.message || data });
+      res.status(500).json({ error: "ComGate error", detail: data });
     }
   } catch (error) {
     res.status(500).json({ error: "Server error", detail: error.message });
