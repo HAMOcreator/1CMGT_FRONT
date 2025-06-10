@@ -3,33 +3,23 @@ import { useState } from 'react';
 
 export default function Home() {
   const [nickname, setNickname] = useState('');
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (!nickname) return;
-    setLoading(true);
 
-    try {
-      const response = await fetch('/api/create-payment', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ nickname })
-      });
+    const params = new URLSearchParams({
+      merchant: "495742",
+      secret: "kpdj7DaJ7v6SHSsazlFc0g2NHzL4T4WZ",
+      price: "10000",
+      label: nickname,
+      curr: "CZK",
+      method: "ALL",
+      redirect: "https://hamocreator.github.io/THANK_YOU/",
+      prepareOnly: "false"
+    });
 
-      const data = await response.json();
-
-      if (data.redirect) {
-        window.location.href = data.redirect;
-      } else {
-        alert("Chyba: " + (data.error || "neznámá") + "\nDetail: " + JSON.stringify(data.detail));
-        setLoading(false);
-      }
-    } catch (err) {
-      alert("Chyba spojení se serverem: " + err.message);
-      setLoading(false);
-    }
+    const comgateUrl = `https://payments.comgate.cz/v1.0/create?${params.toString()}`;
+    window.location.href = comgateUrl;
   };
 
   return (
@@ -44,10 +34,9 @@ export default function Home() {
       />
       <button
         onClick={handleSubmit}
-        disabled={loading}
         style={{ padding: 10, fontSize: 18, backgroundColor: '#4CAF50', color: 'white', border: 'none' }}
       >
-        {loading ? 'Načítání...' : 'Zaplatit'}
+        Zaplatit
       </button>
     </div>
   );
