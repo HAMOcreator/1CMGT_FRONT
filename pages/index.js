@@ -22,7 +22,7 @@ export default function Home() {
       if (data.redirect) {
         window.location.href = data.redirect;
       } else {
-        alert("Chyba: " + (data.error || "neznámá") + "\\nDetail: " + JSON.stringify(data.detail));
+        alert("Chyba: " + (data.error || "neznámá") + "\nDetail: " + JSON.stringify(data.detail));
         setLoading(false);
       }
     } catch (err) {
