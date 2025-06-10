@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 
 export default function Home() {
@@ -8,20 +7,26 @@ export default function Home() {
   const handleSubmit = async () => {
     if (!nickname) return;
     setLoading(true);
-    const response = await fetch('/api/create-payment', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ nickname })
-    });
 
-    const data = await response.json();
-    if (data.redirect) {
-      window.location.href = data.redirect;
-    } else {
-      alert("Chyba: " + (data.error || "neznámá") + "\\nDetail: " + JSON.stringify(data.detail));
+    try {
+      const response = await fetch('/api/create-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nickname })
+      });
 
+      const data = await response.json();
+
+      if (data.redirect) {
+        window.location.href = data.redirect;
+      } else {
+        alert("Chyba: " + (data.error || "neznámá") + "\\nDetail: " + JSON.stringify(data.detail));
+        setLoading(false);
+      }
+    } catch (err) {
+      alert("Chyba spojení se serverem.");
       setLoading(false);
     }
   };
