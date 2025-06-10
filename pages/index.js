@@ -20,7 +20,8 @@ export default function Home() {
     if (data.redirect) {
       window.location.href = data.redirect;
     } else {
-      alert("Chyba: " + (data.detail || "neznámá"));
+      alert("Chyba: " + (data.error || "neznámá") + "\\nDetail: " + JSON.stringify(data.detail));
+
       setLoading(false);
     }
   };
