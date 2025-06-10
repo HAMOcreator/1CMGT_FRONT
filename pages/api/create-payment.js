@@ -16,10 +16,11 @@ export default async function handler(req, res) {
   params.append("prepareOnly", "true");
 
   try {
-    const response = await fetch("https://payments.comgate.cz/v1.0/create", {
+    const response = await fetch("https://test.comgate.cz/v1.0/create", {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Accept": "application/x-www-form-urlencoded"
       },
       body: params.toString()
     });
