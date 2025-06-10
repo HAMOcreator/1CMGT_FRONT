@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   params.append("curr", "CZK");
   params.append("method", "ALL");
   params.append("redirect", "https://hamocreator.github.io/THANK_YOU/");
-  params.append("prepareOnly", "false");
+  params.append("prepareOnly", "true");
 
   try {
     const response = await fetch("https://payments.comgate.cz/v1.0/create", {
