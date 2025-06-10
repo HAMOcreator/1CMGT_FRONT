@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 
 export default function Home() {
@@ -10,9 +9,11 @@ export default function Home() {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/create-payment', {
+      const response = await fetch('https://2-cmgt-server.vercel.app/api/create-payment', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({ nickname })
       });
 
@@ -21,11 +22,11 @@ export default function Home() {
       if (data.redirect) {
         window.location.href = data.redirect;
       } else {
-        alert("Chyba: " + (data.error || "neznámá") + "\nDetail: " + JSON.stringify(data.detail));
+        alert("❌ Chyba: " + (data.error || "neznámá") + "\n🔍 Detail: " + JSON.stringify(data.detail));
         setLoading(false);
       }
     } catch (err) {
-      alert("Chyba spojení se serverem.");
+      alert("⚠️ Chyba spojení se serverem.");
       setLoading(false);
     }
   };
@@ -45,7 +46,7 @@ export default function Home() {
         disabled={loading}
         style={{ padding: 10, fontSize: 18, backgroundColor: '#4CAF50', color: 'white', border: 'none' }}
       >
-        {loading ? 'Načítání...' : 'Zaplatit'}
+        {loading ? 'Načítání…' : 'Zaplatit'}
       </button>
     </div>
   );
