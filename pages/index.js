@@ -20,7 +20,7 @@ export default function Home() {
     if (data.redirect) {
       window.location.href = data.redirect;
     } else {
-      alert("Něco se pokazilo.");
+      alert("Chyba: " + (data.detail || "neznámá"));
       setLoading(false);
     }
   };
